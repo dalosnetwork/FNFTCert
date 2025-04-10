@@ -1,0 +1,20 @@
+{
+    "name": "NFTNAME",
+    "description": "NFTDESCRIPTION",
+    "image": "https://example.com/images/1.jpg",
+    "external_url": "https://example.com",
+    "attributes": [
+      {
+        "total_gram": "TOTAL_GRAM",
+        "value": "2000" // Example value
+      },
+        {
+            "address1": "0x1234567890abcdef1234567890abcdef12345678",
+            "value": "1000" // Example value
+        },
+        {
+            "address2": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+            "value": "2000" // Example value
+        }
+    ]
+  }
