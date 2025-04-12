@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract MergedERC721 is ERC721URIStorage {
     address public owner;
+    uint256 public tokenIdCounter;
 
     constructor(string memory name, string memory symbol) ERC721(name, symbol) {
         owner = msg.sender;
@@ -15,9 +16,9 @@ contract MergedERC721 is ERC721URIStorage {
         _;
     }
 
-    function mint(address to, uint256 tokenId, string memory tokenURI) external onlyOwner() {
-        _mint(to, tokenId);
-        _setTokenURI(tokenId, tokenURI);
+    function mint(address to, string memory tokenURI) external onlyOwner() {
+        _mint(to, tokenIdCounter);
+        _setTokenURI(tokenIdCounter, tokenURI);
     }
 
     function transferOwnership(address newOwner) external onlyOwner() {

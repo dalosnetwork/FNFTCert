@@ -38,6 +38,8 @@ contract Vault {
 
         _erc721.safeTransferFrom(address(this), msg.sender, _tokenID);
         _erc20.transferFrom(msg.sender, address(0), sender_balance);
+
+        _storage.setPair(address(0), _tokenID);
     }
 
     function setNFT(address _nft) external onlyOwner() {

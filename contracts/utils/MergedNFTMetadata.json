@@ -5,8 +5,7 @@
     "external_url": "https://example.com",
     "attributes": [
       {
-        "total_gram": "TOTAL_GRAM",
-        "value": "2000" // Example value
+        "total_gram": "3000", // Example, sum of bottom address1 value + address2 value
       },
         {
             "address1": "0x1234567890abcdef1234567890abcdef12345678",

@@ -5,6 +5,10 @@ import "./CertificateERC721.sol";
 
 contract CertificateERC721Factory {
     address owner;
+
+    mapping(address => bool) public cleanList;
+
+    event NFTCreated(address indexed certificateAddress, string name, string symbol);
     
     constructor() {
         owner = msg.sender;
@@ -15,9 +19,20 @@ contract CertificateERC721Factory {
         _;
     }
 
-    function createERC721(string memory name, string memory symbol) external onlyOwner returns (address) {
+    modifier onlyCleanList() {
+        require(cleanList[msg.sender], "Not in the clean list");
+        _;
+    }
+
+    function createERC721(string memory name, string memory symbol) external onlyCleanList returns (address) {
         CertificateERC721 newToken = new ERC721(name, symbol);
+        
+        emit NFTCreated(address(newToken), name, symbol);
         return address(newToken);
+    }
+
+    function updateCleanList(address _address, bool status) external onlyOwner {
+        cleanList[_address] = status;
     }
 
     function transferOwnership(address newOwner) external onlyOwner {

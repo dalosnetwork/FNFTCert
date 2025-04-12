@@ -5,7 +5,10 @@ contract Storage {
     address owner;
 
     mapping(address => uint256) tokenNFTPair; // token address - tokenID
+    mapping(uint256 => address) nftTokenPair; // tokenID - token address
     mapping(address => bool) cleanList; // userAddress - is clean
+
+    event PairSet(address indexed tokenAddress, uint256 indexed tokenID);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not the contract owner");
@@ -17,8 +20,15 @@ contract Storage {
         _;
     }
 
-    function setTokenNFTPair(address _tokenAddress, uint256 _tokenID) external onlyClean {
+    function setPair(address _tokenAddress, uint256 _tokenID) external onlyClean {
         tokenNFTPair[_tokenAddress] = _tokenID;
+        nftTokenPair[_tokenID] = _tokenAddress;
+
+        emit PairSet(_tokenAddress, _tokenID);
+    }
+
+    function getNftTokenPair(uint256 _tokenID) external view returns (address) {
+        return nftTokenPair[_tokenID];
     }
 
     function getTokenNFTPair(address _tokenAddress) external view returns (uint256) {

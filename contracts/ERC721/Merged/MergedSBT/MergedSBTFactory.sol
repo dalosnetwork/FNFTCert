@@ -3,9 +3,13 @@ pragma solidity ^0.8.26;
 
 import "./MergedSBT.sol";
 
-contract MErgedSBTFactory {
+contract MergedSBTFactory {
     address owner;
     
+    mapping(address => bool) public isClean;
+
+    event MergedSBTCreated(address indexed newToken, string name, string symbol);
+
     constructor() {
         owner = msg.sender;
     }
@@ -15,9 +19,20 @@ contract MErgedSBTFactory {
         _;
     }
 
-    function createSBT(string memory name, string memory symbol) external onlyOwner returns (address) {
+    modifier onlyCleanList() {
+        require(isClean[msg.sender], "Not a clean address");
+        _;
+    }
+
+    function createSBT(string memory name, string memory symbol) external onlyCleanList returns (address) {
         MergedSBT newToken = new ERC721(name, symbol);
+
+        emit MergedSBTCreated(address(newToken), name, symbol);
         return address(newToken);
+    }
+
+    function updateCleanList(address _address, bool _status) external onlyOwner {
+        cleanList[_address] = _status;
     }
 
     function transferOwnership(address newOwner) external onlyOwner {
