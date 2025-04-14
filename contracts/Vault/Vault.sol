@@ -34,10 +34,9 @@ contract Vault {
 
         require(sender_balance == totalSupply, "Insufficient balance");
         require(sender_allowance >= totalSupply, "Insufficient allowance");
-        require(_erc20.transferFrom(msg.sender, address(this), totalSupply), "Transfer failed");
+        require(_erc20.transferFrom(msg.sender, address(0), totalSupply), "Transfer failed");
 
         _erc721.safeTransferFrom(address(this), msg.sender, _tokenID);
-        _erc20.transferFrom(msg.sender, address(0), sender_balance);
 
         _storage.setPair(address(0), _tokenID);
     }
