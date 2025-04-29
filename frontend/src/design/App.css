@@ -1,42 +1,55 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none; }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+.layout {
+  display: flex;
+  height: 100vh; }
+  .layout .sidebar {
+    position: relative;
+    width: 240px;
+    background: #2c3e50;
+    color: #ecf0f1;
+    transition: width 0.3s ease; }
+    .layout .sidebar.collapsed .layout .sidebar {
+      /* not needed—see parent class below */ }
+    .layout .sidebar .toggle-btn {
+      position: absolute;
+      top: 12px;
+      right: -12px;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: #34495e;
+      color: #ecf0f1;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1; }
+    .layout .sidebar .menu {
+      margin-top: 60px; }
+      .layout .sidebar .menu ul {
+        list-style: none;
+        padding: 0; }
+        .layout .sidebar .menu ul li {
+          padding: 12px 16px;
+          white-space: nowrap; }
+  .layout .main {
+    flex: 1;
+    padding: 24px;
+    background: #ecf0f1;
+    transition: margin 0.3s ease; }
+  .layout.collapsed {
+    /* main will automatically grow: no extra CSS needed */ }
+    .layout.collapsed .sidebar {
+      width: 0px; }
+      .layout.collapsed .sidebar .menu {
+        /* hide labels when collapsed */ }
+        .layout.collapsed .sidebar .menu ul li {
+          opacity: 0;
+          pointer-events: none; }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+/*# sourceMappingURL=app.css.map */
