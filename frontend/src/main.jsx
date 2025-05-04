@@ -4,8 +4,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { ModalProvider, useModal } from "./context/modalContext.jsx";
 import ModalManager from "./components/modalManager.jsx";
-import App from "./pages/app.jsx";
 import Login from "./pages/login.jsx";
+import App from "./pages/App.jsx";
 
 const ModalRoot = () => {
   const { modalType, modalProps, hideModal } = useModal();

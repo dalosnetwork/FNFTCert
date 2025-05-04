@@ -1,5 +1,4 @@
-
-*{
+* {
   margin: 0;
   padding: 0;
   outline: none;
@@ -9,15 +8,21 @@
 .layout {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 
   .sidebar {
+    flex-direction: column;
     position: relative;
     width: 240px;
     background: #2c3e50;
+    display: flex;
+    justify-content: space-between;
     color: #ecf0f1;
     transition: width 0.3s ease;
 
-    &.collapsed & { /* not needed—see parent class below */ }
+    &.collapsed & {
+      /* not needed—see parent class below */
+    }
 
     .toggle-btn {
       position: absolute;
@@ -39,8 +44,8 @@
         list-style: none;
         padding: 0;
         li {
-          padding: 12px 16px;
           white-space: nowrap;
+          cursor: pointer;
         }
       }
     }
@@ -56,8 +61,12 @@
   &.collapsed {
     .sidebar {
       width: 0px;
-      .menu { /* hide labels when collapsed */
-        ul li { opacity: 0; pointer-events: none; }
+      .menu {
+        /* hide labels when collapsed */
+        ul li {
+          opacity: 0;
+          pointer-events: none;
+        }
       }
     }
     /* main will automatically grow: no extra CSS needed */
