@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Home from "./home.jsx";
 import Certificates from "./certificates.jsx";
 import Transactions from "./transactions.jsx";
+import Icon from "../components/iconManager.jsx";
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -12,7 +13,7 @@ const App = () => {
     <div className={`layout ${collapsed ? "collapsed" : ""}`}>
       <aside className="sidebar">
         <button className="toggle-btn" onClick={toggle}>
-          {collapsed ? "»" : "«"}
+          <Icon name={"collapse"}/>
         </button>
         <nav className="menu">
           <ul>

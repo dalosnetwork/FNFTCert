@@ -13,10 +13,9 @@
     flex-direction: column;
     position: relative;
     width: 240px;
-    background: #2c3e50;
+    background: #4cbd9a;
     display: flex;
     justify-content: space-between;
-    color: #ecf0f1;
     transition: width 0.3s ease; }
     .layout .sidebar.collapsed .layout .sidebar {
       /* not needed—see parent class below */ }
@@ -27,9 +26,8 @@
       width: 24px;
       height: 24px;
       border: none;
-      background: #34495e;
-      color: #ecf0f1;
       border-radius: 50%;
+      background-color: transparent;
       cursor: pointer;
       font-size: 14px;
       line-height: 1; }
@@ -53,7 +51,22 @@
       .layout.collapsed .sidebar .menu {
         /* hide labels when collapsed */ }
         .layout.collapsed .sidebar .menu ul li {
-          opacity: 0;
           pointer-events: none; }
+
+.statWrapper {
+  position: relative;
+  width: 170px;
+  height: 170px; }
+  .statWrapper .number,
+  .statWrapper .text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    /* you can tweak font-size, line-height, etc. for spacing */ }
+  .statWrapper .number {
+    bottom: 50%; }
+  .statWrapper .text {
+    top: 50%; }
 
 /*# sourceMappingURL=app.css.map */
