@@ -7,7 +7,7 @@ const Certificates= () => {
   const [tab, setTab] = useState();
 
   return (
-    <div className={`layout ${collapsed ? "collapsed" : ""}`}>
+    <div className={`${collapsed ? "collapsed" : ""}`}>
       Certificates
     </div>
   );

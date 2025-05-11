@@ -13,8 +13,8 @@ const Stat = ({ number, text }) => {
       >
         <circle cx="85" cy="84.5" r="74" stroke="#4CBD9A" stroke-width="21" />
       </svg>
-      <span className="number">{number}</span>
-      <span className="text">{text}</span>
+      <span className="number font40 bold">{number}</span>
+      <span className="text font16">{text}</span>
     </div>
   );
 };

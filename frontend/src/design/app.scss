@@ -1,11 +1,58 @@
 $teal: #4cbd9a;
 $gray: #333333;
+$white: #fff;
 
 * {
   margin: 0;
   padding: 0;
   outline: none;
   border: none;
+  font-family: "Gilroy Regular";
+}
+
+@font-face {
+  font-family: "Gilroy Regular";
+  src: url("./fonts/Gilroy-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Gilroy Bold";
+  src: url("./fonts/Gilroy-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Gilroy Thin";
+  src: url("./fonts/Gilroy-Thin.woff2") format("woff2");
+}
+
+.font12 {
+  font-size: 12px;
+}
+.font16 {
+  font-size: 16px;
+}
+.font18 {
+  font-size: 18px;
+}
+.font24 {
+  font-size: 24px;
+}
+.font40 {
+  font-size: 40px;
+}
+.font16 {
+  font-size: 16px;
+}
+
+.bold {
+  font-family: "Gilroy Bold", "Gilroy Regular";
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+::selection {
+  background-color: $gray;
+  color: $white;
 }
 
 .layout {
@@ -14,49 +61,36 @@ $gray: #333333;
   overflow: hidden;
 
   .sidebar {
-    flex-direction: column;
-    position: relative;
     width: 240px;
-    background: $teal;
-    display: flex;
-    justify-content: space-between;
     transition: width 0.3s ease;
-
-    &.collapsed & {
-      /* not needed—see parent class below */
-    }
-
+    overflow: hidden;
+    background-color: $teal;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .toggle-btn {
-      position: absolute;
-      top: 12px;
-      right: -12px;
-      width: 24px;
-      height: 24px;
-      border: none;
-      border-radius: 50%;
       background-color: transparent;
-      cursor: pointer;
-      font-size: 14px;
-      line-height: 1;
     }
     .menu {
-      margin-top: 60px;
-      ul {
-        list-style: none;
-        padding: 0;
-        li {
-          white-space: nowrap;
-          cursor: pointer;
-        }
+      padding: 48px 32px;
+      .menu-inner {
+        transition: transform 0.3s ease;
+        transform: translateX(0);
       }
     }
   }
 
+  .inner{
+    padding: 0 48px;
+  }
+
   .main {
     flex: 1;
-    padding: 24px;
-    background: #ecf0f1;
+    padding-top: 48px;
+    background: $white;
     transition: margin 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   &.collapsed {
@@ -65,6 +99,7 @@ $gray: #333333;
       .menu {
         /* hide labels when collapsed */
         ul li {
+          opacity: 0;
           pointer-events: none;
         }
       }
@@ -72,6 +107,12 @@ $gray: #333333;
     /* main will automatically grow: no extra CSS needed */
   }
 }
+
+.header {
+  background-color: $teal;
+  padding: 4px 0;
+}
+
 .statWrapper {
   position: relative;
   width: 170px;
@@ -80,13 +121,14 @@ $gray: #333333;
   .number,
   .text {
     position: absolute;
+    width: 100px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     /* you can tweak font-size, line-height, etc. for spacing */
   }
   .number {
-    bottom: 50%;
+    bottom: 46%;
   }
   .text {
     top: 50%;

@@ -1,49 +1,75 @@
-@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
   outline: none;
-  border: none; }
+  border: none;
+  font-family: "Gilroy Regular"; }
+
+@font-face {
+  font-family: "Gilroy Regular";
+  src: url("./fonts/Gilroy-Regular.woff2") format("woff2"); }
+@font-face {
+  font-family: "Gilroy Bold";
+  src: url("./fonts/Gilroy-Bold.woff2") format("woff2"); }
+@font-face {
+  font-family: "Gilroy Thin";
+  src: url("./fonts/Gilroy-Thin.woff2") format("woff2"); }
+.font12 {
+  font-size: 12px; }
+
+.font16 {
+  font-size: 16px; }
+
+.font18 {
+  font-size: 18px; }
+
+.font24 {
+  font-size: 24px; }
+
+.font40 {
+  font-size: 40px; }
+
+.font16 {
+  font-size: 16px; }
+
+.bold {
+  font-family: "Gilroy Bold", "Gilroy Regular"; }
+
+.pointer {
+  cursor: pointer; }
+
+::selection {
+  background-color: #333333;
+  color: #fff; }
 
 .layout {
   display: flex;
   height: 100vh;
   overflow: hidden; }
   .layout .sidebar {
-    flex-direction: column;
-    position: relative;
     width: 240px;
-    background: #4cbd9a;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    background-color: #4cbd9a;
     display: flex;
-    justify-content: space-between;
-    transition: width 0.3s ease; }
-    .layout .sidebar.collapsed .layout .sidebar {
-      /* not needed—see parent class below */ }
+    flex-direction: column;
+    justify-content: space-between; }
     .layout .sidebar .toggle-btn {
-      position: absolute;
-      top: 12px;
-      right: -12px;
-      width: 24px;
-      height: 24px;
-      border: none;
-      border-radius: 50%;
-      background-color: transparent;
-      cursor: pointer;
-      font-size: 14px;
-      line-height: 1; }
+      background-color: transparent; }
     .layout .sidebar .menu {
-      margin-top: 60px; }
-      .layout .sidebar .menu ul {
-        list-style: none;
-        padding: 0; }
-        .layout .sidebar .menu ul li {
-          white-space: nowrap;
-          cursor: pointer; }
+      padding: 48px 32px; }
+      .layout .sidebar .menu .menu-inner {
+        transition: transform 0.3s ease;
+        transform: translateX(0); }
+  .layout .inner {
+    padding: 0 48px; }
   .layout .main {
     flex: 1;
-    padding: 24px;
-    background: #ecf0f1;
-    transition: margin 0.3s ease; }
+    padding-top: 48px;
+    background: #fff;
+    transition: margin 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden; }
   .layout.collapsed {
     /* main will automatically grow: no extra CSS needed */ }
     .layout.collapsed .sidebar {
@@ -51,7 +77,12 @@
       .layout.collapsed .sidebar .menu {
         /* hide labels when collapsed */ }
         .layout.collapsed .sidebar .menu ul li {
+          opacity: 0;
           pointer-events: none; }
+
+.header {
+  background-color: #4cbd9a;
+  padding: 4px 0; }
 
 .statWrapper {
   position: relative;
@@ -60,12 +91,13 @@
   .statWrapper .number,
   .statWrapper .text {
     position: absolute;
+    width: 100px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     /* you can tweak font-size, line-height, etc. for spacing */ }
   .statWrapper .number {
-    bottom: 50%; }
+    bottom: 46%; }
   .statWrapper .text {
     top: 50%; }
 
