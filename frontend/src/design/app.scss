@@ -1,4 +1,5 @@
 $teal: #4cbd9a;
+$teal2: #d5f1e9;
 $gray: #333333;
 $white: #fff;
 
@@ -8,6 +9,7 @@ $white: #fff;
   outline: none;
   border: none;
   font-family: "Gilroy Regular";
+  color: $gray;
 }
 
 @font-face {
@@ -17,6 +19,10 @@ $white: #fff;
 @font-face {
   font-family: "Gilroy Bold";
   src: url("./fonts/Gilroy-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Gilroy Semibold";
+  src: url("./fonts/Gilroy-Semibold.woff2") format("woff2");
 }
 @font-face {
   font-family: "Gilroy Thin";
@@ -44,10 +50,32 @@ $white: #fff;
 
 .bold {
   font-family: "Gilroy Bold", "Gilroy Regular";
+  font-weight: 400;
+}
+.semibold {
+  font-family: "Gilroy Semibold", "Gilroy Regular";
+  font-weight: 400;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.label:hover:not(.bold) {
+  color: $white;
+  font-family: "Gilroy Regular";
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
 
 ::selection {
@@ -80,7 +108,7 @@ $white: #fff;
     }
   }
 
-  .inner{
+  .inner {
     padding: 0 48px;
   }
 
@@ -132,5 +160,186 @@ $white: #fff;
   }
   .text {
     top: 50%;
+  }
+}
+
+$col-widths: 15% 10% 15% 10% 15% 15% 20%;
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 0 12px;
+  thead {
+    border-top: 1px solid $teal;
+    border-bottom: 1px solid $teal;
+  }
+  th,
+  td {
+    padding: 8px 0;
+    border: none;
+    text-align: center;
+    line-height: 2;
+  }
+
+  @for $i from 1 through length($col-widths) {
+    th:nth-child(#{$i}),
+    td:nth-child(#{$i}) {
+      width: nth($col-widths, $i);
+    }
+  }
+  tbody {
+    tr {
+      // odd rows: transparent
+      &:nth-child(2n + 1) {
+        background: transparent;
+      }
+      // even rows: green
+      &:nth-child(2n) {
+        background: $teal2;
+      }
+      &:hover {
+        background-color: $teal;
+      }
+    }
+  }
+}
+
+.button1 {
+  background-color: $teal;
+  border-radius: 7px;
+  padding: 8px 16px;
+  &.sm {
+    padding: none;
+  }
+  &.login {
+    border-radius: 8px;
+    background-color: $gray;
+    display: flex;
+    height: 40px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: var(--Teal2, #d5f1e9);
+    text-align: justify;
+    font-family: "Gilroy SemiBold";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    &.disabled {
+      background: var(--Yeil-Yeil-100, #dae9e1);
+      color: var(--Gri-Gri-200, #a6a6a6);
+    }
+  }
+}
+
+.search {
+  border-radius: 7px;
+  background-color: $teal2;
+  padding: 3px 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  transition: 0.5s al ease-in;
+  &.sm {
+    width: 86px;
+  }
+  svg {
+    margin-right: 10px;
+  }
+  input {
+    background-color: transparent;
+    width: 100%;
+    &::placeholder {
+      color: $gray;
+    }
+  }
+  &:focus-within {
+    background-color: $white;
+    box-shadow: inset 0 0 0 1px $teal;
+    input {
+      &::placeholder {
+        display: none !important;
+      }
+    }
+  }
+  &:hover {
+    box-shadow: inset 0 0 0 1px $teal;
+  }
+}
+
+#dropdownDate {
+  background-color: $teal2;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  height: 40px;
+  width: 40px;
+  &::after {
+    display: none;
+  }
+}
+
+.paginationButton {
+  background-color: transparent;
+  font-family: "Gilroy Regular";
+  color: $gray;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 0 5px;
+  &:hover {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+  }
+  &.active {
+    font-family: "Gilroy Bold";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+  }
+}
+
+#login {
+  background-color: $teal;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("./assets/login.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  .loginWrapper {
+    background-color: rgba($white, 0.2);
+    max-width: 450px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 18px;
+    padding: 32px;
+    .loginInput{
+      padding: 16px;
+      border-radius: 7px;
+      background-color: $white;
+      width: 100%;
+      input{
+        width: 100%;
+        &.password{
+          width: calc(100% - 24px);
+        }
+      }
+    }
   }
 }

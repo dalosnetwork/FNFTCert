@@ -21,19 +21,19 @@ const App = () => {
             </button>
           </div>
           <div
-            className={`pointer font18 ${tab === "home" ? `bold` : ``}`}
+            className={`label pointer font18 ${tab === "home" ? `bold` : ``}`}
             onClick={() => setTab("home")}
           >
             Home
           </div>
           <div
-            className={`pointer font18 ${tab === "certificates" ? `bold` : ``}`}
+            className={`label pointer font18 ${tab === "certificates" ? `bold` : ``}`}
             onClick={() => setTab("certificates")}
           >
             Certificates
           </div>
           <div
-            className={`pointer font18 ${tab === "transactions" ? `bold` : ``}`}
+            className={`label pointer font18 ${tab === "transactions" ? `bold` : ``}`}
             onClick={() => setTab("transactions")}
           >
             Transactions
@@ -48,7 +48,7 @@ const App = () => {
         </div>
       </aside>
 
-      <main className="main">
+      <main className="main pb-4">
         <button className="toggle-btn position-absolute" style={{top:"0"}} onClick={toggle}>
           <Icon name={"collapse"} />
         </button>

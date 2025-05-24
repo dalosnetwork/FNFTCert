@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Icon from '../iconManager';
+import Icon from './iconManager';
 
 const Button1 = ({ onClick, label, className, iconName, img, imgClass, style, id }) => {
   return (

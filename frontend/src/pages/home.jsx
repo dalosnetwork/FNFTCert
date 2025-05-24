@@ -1,15 +1,14 @@
-// SidebarLayout.jsx
-import React, { useState } from "react";
 import Stat from "../components/stat";
+import Icon from "../components/iconManager.jsx";
+import List from "../components/list.jsx";
 
 const Home = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const toggle = () => setCollapsed((c) => !c);
-  const [tab, setTab] = useState();
 
+  
+  
   return (
-    <div className="inner">
-      <div className="row">
+    <div className="">
+      <div className="row inner">
         <div className="col-12 my-4 font18 bold">Stats</div>
       </div>
       <div className="row d-flex justify-content-center">
@@ -50,8 +49,13 @@ const Home = () => {
           <Stat number="42" text="Projects Completed" />
         </div>
       </div>
-      <div className="row">
+      <div className="row inner">
         <div className="col-12 my-4 font18 bold">Recent Transactions</div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <List />
+        </div>
       </div>
     </div>
   );
