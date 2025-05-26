@@ -226,6 +226,8 @@
   width: 40px; }
   #dropdownDate::after {
     display: none; }
+  #dropdownDate:hover {
+    background-color: #4cbd9a; }
 
 .paginationButton {
   background-color: transparent;
@@ -262,16 +264,38 @@
   width: 100vw;
   background-image: url("./assets/login.svg");
   background-position: center;
-  background-size: cover;
+  background-size: 90%;
   background-repeat: no-repeat;
   overflow: hidden; }
   #login .loginWrapper {
     background-color: rgba(255, 255, 255, 0.2);
     max-width: 450px;
+    padding: 32px;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-radius: 18px;
-    padding: 32px; }
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden; }
+    #login .loginWrapper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+      border-radius: inherit;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      pointer-events: none; }
+    #login .loginWrapper.error::before {
+      background: linear-gradient(to bottom, rgba(228, 105, 98, 0.8), rgba(228, 105, 98, 0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); }
+    #login .loginWrapper.error .loginInput {
+      background-color: #DBC7C6;
+      box-shadow: inset 0px 0px 0px 3px #e46962; }
+      #login .loginWrapper.error .loginInput input {
+        background-color: #DBC7C6; }
     #login .loginWrapper .loginInput {
       padding: 16px;
       border-radius: 7px;
@@ -281,5 +305,7 @@
         width: 100%; }
         #login .loginWrapper .loginInput input.password {
           width: calc(100% - 24px); }
+    #login .loginWrapper .errorMsg {
+      color: #B3261E; }
 
 /*# sourceMappingURL=app.css.map */
