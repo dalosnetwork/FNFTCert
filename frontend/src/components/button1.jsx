@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Icon from './iconManager';
 
-const Button1 = ({ onClick, label, className, iconName, img, imgClass, style, id }) => {
+const Button1 = ({ onClick, label, className, iconName, img, imgClass, style, id , ref, type}) => {
   return (
-    <button id={id} onClick={onClick} className={`button1 ${className}`} style={style}>
+    <button id={id} onClick={onClick} className={`button1 ${className}`} style={style} ref={ref} type={type}>
       {iconName ? (
         <Icon name={iconName} className={`placeholder my-auto me-2 ${imgClass}`} />
       ) : img ? (

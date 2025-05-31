@@ -11,10 +11,10 @@ const Stat = ({ number, text }) => {
         viewBox="0 0 170 169"
         fill="none"
       >
-        <circle cx="85" cy="84.5" r="74" stroke="#4CBD9A" stroke-width="21" />
+        <circle cx="85" cy="84.5" r="74" stroke="#4CBD9A" strokeWidth="21" />
       </svg>
       <span className="number font40 bold">{number}</span>
-      <span className="text font16">{text}</span>
+      <span className="text semibold font14" style={{lineHeight:"1"}}>{text}</span>
     </div>
   );
 };

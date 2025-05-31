@@ -21,6 +21,9 @@
 .font12 {
   font-size: 12px; }
 
+.font14 {
+  font-size: 14px; }
+
 .font16 {
   font-size: 16px; }
 
@@ -123,7 +126,7 @@
   .statWrapper .number {
     bottom: 46%; }
   .statWrapper .text {
-    top: 50%; }
+    top: 53%; }
 
 .custom-table {
   width: 100%;
@@ -188,7 +191,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal; }
-    .button1.login.disabled {
+    .button1.login:focus {
       background: var(--Yeil-Yeil-100, #dae9e1);
       color: var(--Gri-Gri-200, #a6a6a6); }
 
@@ -264,7 +267,7 @@
   width: 100vw;
   background-image: url("./assets/login.svg");
   background-position: center;
-  background-size: 90%;
+  background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden; }
   #login .loginWrapper {

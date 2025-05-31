@@ -6,6 +6,8 @@ import { ModalProvider, useModal } from "./context/modalContext.jsx";
 import ModalManager from "./components/modalManager.jsx";
 import Login from "./pages/login.jsx";
 import App from "./pages/App.jsx";
+import store from "./store/app/store.js";
+import { Provider } from "react-redux";
 
 const ModalRoot = () => {
   const { modalType, modalProps, hideModal } = useModal();
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
     element: <Navigate to="/login" replace />,
   },
   {
-    path: "/",
+    path: "/panel",
     element: <App />,
   },
   {
@@ -29,11 +31,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
-      <ModalProvider>
+    <Provider store={store}>
+      {/* <ModalProvider> */}
         <RouterProvider router={router} />
-        <ModalRoot />
-      </ModalProvider>
-    {/* </Provider> */}
+        {/* <ModalRoot /> */}
+      {/* </ModalProvider> */}
+    </Provider>
   </React.StrictMode>
 );

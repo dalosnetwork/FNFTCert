@@ -32,6 +32,9 @@ $red: #e46962;
 .font12 {
   font-size: 12px;
 }
+.font14 {
+  font-size: 14px;
+}
 .font16 {
   font-size: 16px;
 }
@@ -159,7 +162,7 @@ $red: #e46962;
     bottom: 46%;
   }
   .text {
-    top: 50%;
+    top: 53%;
   }
 }
 
@@ -227,7 +230,7 @@ $col-widths: 15% 10% 15% 10% 15% 15% 20%;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    &.disabled {
+    &:focus {
       background: var(--Yeil-Yeil-100, #dae9e1);
       color: var(--Gri-Gri-200, #a6a6a6);
     }
@@ -322,7 +325,7 @@ $col-widths: 15% 10% 15% 10% 15% 15% 20%;
   width: 100vw;
   background-image: url("./assets/login.svg");
   background-position: center;
-  background-size: 90%;
+  background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
   .loginWrapper {
