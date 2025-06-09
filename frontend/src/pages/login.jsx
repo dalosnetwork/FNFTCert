@@ -47,6 +47,7 @@ function Login() {
         setErrorState(true);
       } else if (data.status == 200) {
         console.log("BAŞARILI")
+        sessionStorage.setItem("mail", loginData.username);
         sessionStorage.setItem("token", data.data.access_token);
         navigate("/panel")
       } else {

@@ -94,6 +94,60 @@ export default function Icon({ name, ...props }) {
           </defs>
         </svg>
       );
+    case "sortReverse":
+      return (
+        <svg
+          className={props.className}
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <g clip-path="url(#clip0_105_456)">
+            <path
+              d="M10 8L7 5L4 8"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 6V18"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M17 3C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V8C19 8.53043 18.7893 9.03914 18.4142 9.41421C18.0391 9.78929 17.5304 10 17 10C16.4696 10 15.9609 9.78929 15.5858 9.41421C15.2107 9.03914 15 8.53043 15 8V5C15 4.46957 15.2107 3.96086 15.5858 3.58579C15.9609 3.21071 16.4696 3 17 3Z"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M15 16C15 16.5304 15.2107 17.0391 15.5858 17.4142C15.9609 17.7893 16.4696 18 17 18C17.5304 18 18.0391 17.7893 18.4142 17.4142C18.7893 17.0391 19 16.5304 19 16C19 15.4696 18.7893 14.9609 18.4142 14.5858C18.0391 14.2107 17.5304 14 17 14C16.4696 14 15.9609 14.2107 15.5858 14.5858C15.2107 14.9609 15 15.4696 15 16Z"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M19 16V19C19 19.5304 18.7893 20.0391 18.4142 20.4142C18.0391 20.7893 17.5304 21 17 21H15.5"
+              stroke="#333333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_105_456">
+              <rect width="24" height="24" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      );
     case "search":
       return (
         <svg
@@ -216,48 +270,84 @@ export default function Icon({ name, ...props }) {
           viewBox="0 0 24 24"
           fill="none"
         >
-          <g clipPath="url(#clip0_113_718)">
+          <g clip-path="url(#clip0_113_683)">
             <path
               d="M21 9C18.6 11.667 15.6 13 12 13C8.4 13 5.4 11.667 3 9"
               stroke="#333333"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
             <path
               d="M3 15L5.5 11.2"
               stroke="#333333"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
             <path
-              d="M20.9998 14.976L18.5078 11.2"
+              d="M21.0001 14.976L18.5081 11.2"
               stroke="#333333"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
             <path
               d="M9 17L9.5 13"
               stroke="#333333"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
             <path
               d="M15 17L14.5 13"
               stroke="#333333"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
           </g>
           <defs>
-            <clipPath id="clip0_113_718">
+            <clipPath id="clip0_113_683">
               <rect width="24" height="24" fill="white" />
             </clipPath>
           </defs>
+        </svg>
+      );
+    case "datePrevious":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+        >
+          <path
+            d="M12.5 15L7.5 10L12.5 5"
+            stroke="#333333"
+            stroke-width="1.67"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      );
+    case "dateNext":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+        >
+          <path
+            d="M7.5 15L12.5 10L7.5 5"
+            stroke="#333333"
+            stroke-width="1.67"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       );
     default:

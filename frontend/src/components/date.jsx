@@ -5,107 +5,44 @@ import {
   subMonths,
   startOfWeek,
   addDays,
-  subDays,
   startOfMonth,
-  startOfQuarter,
-  startOfYear,
 } from "date-fns";
 import Button1 from "./button1";
 import Icon from "./iconManager";
 
-const DateFilter = ({ handleFilter }) => {
+const DateFilter = ({ onDateRangeSelect }) => {
   const [fromMonth, setFromMonth] = useState(new Date());
   const [toMonth, setToMonth] = useState(new Date());
   const [fromDay, setFromDay] = useState("");
   const [toDay, setToDay] = useState("");
 
-  const handleSave = async (e) => {
+  const handleSave = (e) => {
     e.preventDefault();
 
     const dropdownContainer = e.target.closest(".dropdown");
     if (!dropdownContainer) return;
-    const toggleEl = dropdownContainer.querySelector('[data-bs-toggle="dropdown"]');
+    const toggleEl = dropdownContainer.querySelector(
+      '[data-bs-toggle="dropdown"]'
+    );
     if (!toggleEl) return;
     let dropdownInstance = window.bootstrap.Dropdown.getInstance(toggleEl);
     if (!dropdownInstance) {
       dropdownInstance = new window.bootstrap.Dropdown(toggleEl);
     }
 
-    if (fromDay) {
-      const fromUTC = toFakeUTCFormat(fromDay);
-      handleFilter("start_date", fromUTC);
-    } else {
-      handleFilter("start_date", null);
-    }
-    if (toDay) {
-      const toUTC = toFakeUTCFormat(toDay);
-      handleFilter("end_date", toUTC);
-    } else {
-      handleFilter("end_date", null);
-    }
+    const fromUTC = fromDay ? toFakeUTCFormat(fromDay) : null;
+    const toUTC = toDay ? toFakeUTCFormat(toDay) : null;
+
+    onDateRangeSelect(fromUTC, toUTC); // ✅ single callback with both values
 
     dropdownInstance.hide();
   };
 
-  const handleDefault = (e, period) => {
-    
-    e.preventDefault();
-
-    const dropdownContainer = e.target.closest(".dropdown");
-    if (!dropdownContainer) return;
-    const toggleEl = dropdownContainer.querySelector('[data-bs-toggle="dropdown"]');
-    if (!toggleEl) return;
-    let dropdownInstance = window.bootstrap.Dropdown.getInstance(toggleEl) ?? new window.bootstrap.Dropdown(toggleEl);
-
-    const now = new Date();
-    let fromDate = null;
-    let toDate = now;
-
-    switch (period) {
-      case "today":
-        fromDate = now;
-        break;
-      case "last7days":
-        fromDate = subDays(now, 6);
-        break;
-      case "last14days":
-        fromDate = subDays(now, 13);
-        break;
-      case "last30days":
-        fromDate = subDays(now, 29);
-        break;
-      case "last3months":
-        fromDate = subMonths(now, 3);
-        break;
-      case "last12months":
-        fromDate = subMonths(now, 12);
-        break;
-      case "monthToDate":
-        fromDate = startOfMonth(now);
-        break;
-      case "quarterToDate":
-        fromDate = startOfQuarter(now);
-        break;
-      case "yearToDate":
-        fromDate = startOfYear(now);
-        break;
-      case "allTime":
-        fromDate = null;
-        toDate = null;
-        break;
-      default:
-        return; 
-    }
-
-    const fmt = (d) => (d ? toFakeUTCFormat(d) : null);
-    handleFilter("start_date", fmt(fromDate));
-    handleFilter("end_date", fmt(toDate));
-
-    dropdownInstance.hide();
-  };
   const pad = (n) => String(n).padStart(2, "0");
   const toFakeUTCFormat = (date) => {
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T00:00:00.000Z`;
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+      date.getDate()
+    )}`;
   };
 
   const getDays = (month) => {
@@ -130,31 +67,45 @@ const DateFilter = ({ handleFilter }) => {
     return (
       <>
         <div className="date">
-          <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
-            <button className="monthButton" onClick={() => setMonth(subMonths(month, 1))}>
-              <Icon name={"previous"} />
+          <div className="d-flex justify-content-between align-items-center gap-2 mb-2">
+            <button
+              className="monthButton"
+              onClick={() => setMonth(subMonths(month, 1))}
+            >
+              <Icon name={"datePrevious"} />
             </button>
-            <div>{format(month, "MMMM yyyy")}</div>
-            <button className="monthButton form2" onClick={() => setMonth(addMonths(month, 1))}>
-              <Icon name={"next"} />
+            <div className="semibold font14 ">{format(month, "MMMM yyyy")}</div>
+            <button
+              className="monthButton semibold font14 "
+              onClick={() => setMonth(addMonths(month, 1))}
+            >
+              <Icon name={"dateNext"} />
             </button>
           </div>
-          <div className="dayLabel" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
+          <div
+            className="dayLabel my-3"
+            style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
+          >
             {weekdays.map((day) => (
-              <div className="form3" key={day}>
+              <div className="semibold font14 " key={day}>
                 {day}
               </div>
             ))}
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
+          >
             {days.map((day) => (
               <div
-                className={`day form2 ${
+                className={`day semibold font14  ${
                   fromDay instanceof Date && day.getTime() === fromDay.getTime()
                     ? "from"
                     : toDay instanceof Date && day.getTime() === toDay.getTime()
                     ? "to"
-                    : fromDay instanceof Date && toDay instanceof Date && day > fromDay && day < toDay
+                    : fromDay instanceof Date &&
+                      toDay instanceof Date &&
+                      day > fromDay &&
+                      day < toDay
                     ? "middle"
                     : ""
                 }`}
@@ -163,7 +114,8 @@ const DateFilter = ({ handleFilter }) => {
                   textAlign: "center",
                   color: "#000",
                   opacity: format(day, "MM") === format(month, "MM") ? 1 : 0,
-                  pointerEvents: format(day, "MM") === format(month, "MM") ? "auto" : "none",
+                  pointerEvents:
+                    format(day, "MM") === format(month, "MM") ? "auto" : "none",
                 }}
                 onClick={() => {
                   const selected = new Date(day);
@@ -193,64 +145,61 @@ const DateFilter = ({ handleFilter }) => {
               </div>
             ))}
           </div>
-          {label == "from" ? (
-            <>
-              <Button1
-                className={"dateButton text4 d-flex justify-content-center my-3"}
-                style={{ width: "100%" }}
-                label={fromDay ? format(fromDay, "dd.MM.yyyy") : "Select From"}
-              />
-              <Button1
-                className={"gray text2 d-flex justify-content-center"}
-                style={{ width: "100%" }}
-                label={"Clear"}
-                onClick={() => {
-                  setFromDay("");
-                  setToDay("");
-                }}
-              />
-            </>
-          ) : label == "to" ? (
-            <>
-              <Button1
-                className={"dateButton text4 d-flex justify-content-center my-3"}
-                style={{ width: "100%" }}
-                label={toDay ? format(toDay, "dd.MM.yyyy") : "Select To"}
-              />
-              <Button1
-                className={"red d-flex justify-content-center"}
-                style={{ width: "100%", fontSize: "16px", fontWeight: "300" }}
-                label={"Save"}
-                onClick={handleSave}
-              />
-            </>
-          ) : null}
         </div>
       </>
     );
   };
 
   return (
-    <div className="dateWrapper text-center d-flex justify-content-center">
-      <div className="">
-        <ul
-          className="text-start"
-          style={{ listStyle: "none", width: "145px", padding: "24px", gap: "12px", display: "grid" }}
-        >
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "today")}>Today</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "last7days")}>Last 7 days</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "last14days")}>Last 14 days</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "last30days")}>Last 30 days</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "last3months")}>Last 3 months</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "last12months")}>Last 12 months</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "monthToDate")}>Month to date</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "quarterToDate")}>Quarter to date</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "yearToDate")}>Year to date</li>
-          <li className="form2 pointer" onClick={(e) => handleDefault(e, "allTime")}>All time</li>
-        </ul>
+    <div className="dateWrapper">
+      <div className="row d-flex align-items-center">
+        <div className="col-6">
+          {renderCalendar(fromMonth, setFromMonth, "from")}
+        </div>
+        <div className="col-6">{renderCalendar(toMonth, setToMonth, "to")}</div>
+        <div className="col-12 d-flex justify-content-between">
+          <div className=" my-auto">
+            <Button1
+              className={
+                "dateButton borderTeal semibold font16  d-flex justify-content-center"
+              }
+              style={{ width: "186px" }}
+              label={fromDay ? format(fromDay, "dd.MM.yyyy") : "Select From"}
+            />
+          </div>
+          <div className="my-auto">-</div>
+          <div className=" my-auto">
+            <Button1
+              className={
+                "dateButton borderTeal semibold font16  d-flex justify-content-center"
+              }
+              style={{ width: "186px" }}
+              label={toDay ? format(toDay, "dd.MM.yyyy") : "Select To"}
+            />
+          </div>
+          <div className=" p-0 my-auto">
+            <Button1
+              className={
+                "semibold borderGray font16 d-flex justify-content-center"
+              }
+              style={{ width: "93px" }}
+              label={"Cancel"}
+              onClick={() => {
+                setFromDay("");
+                setToDay("");
+              }}
+            />
+          </div>
+          <div className=" ps-0 my-auto">
+            <Button1
+              className={"semibold font14 d-flex justify-content-center"}
+              style={{ width: "77px", fontSize: "16px" }}
+              label={"Save"}
+              onClick={handleSave}
+            />
+          </div>
+        </div>
       </div>
-      {renderCalendar(fromMonth, setFromMonth, "from")}
-      {renderCalendar(toMonth, setToMonth, "to")}
     </div>
   );
 };
